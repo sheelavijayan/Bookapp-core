@@ -26,17 +26,18 @@ public class Book {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public LocalDate getPublished_date() {
+	
+		public LocalDate getPublished_date() {
 		return published_date;
+	}
+	public void setPublished_date(LocalDate published_date) {
+		this.published_date = published_date;
 	}
 		@Override
 	public String toString() {
 		return "Book [id=" + id + ", name=" + name + ", price=" + price + ", published_date=" + published_date + "]";
 	}
-		public void setPublished_date(LocalDate localDate) {
-			// TODO Auto-generated method stub
-			
-		}
+		
 		
 		
 	 

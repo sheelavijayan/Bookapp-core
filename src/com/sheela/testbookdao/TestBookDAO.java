@@ -20,6 +20,10 @@ public class TestBookDAO {
 
 		BookDAO bookdao = new BookDAO();
 		//bookdao.register(book);
-		System.out.println(book);
+		List<Book> bookList=bookdao.listBook();
+		for(Book b:bookList)
+		{
+			System.out.println(b);
 			}
 	}
+}

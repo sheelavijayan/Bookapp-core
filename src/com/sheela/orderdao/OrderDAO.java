@@ -23,10 +23,10 @@ public class OrderDAO {
 		LocalDate date=LocalDate.parse( "2017-10-09");
 		String sql="insert into orders(user_id,book_id,status,quantity,orders_date)values(?,?,?,?,?)";
 		PreparedStatement pst=conn.prepareStatement(sql);
-		pst.setInt(1, 3);
-		pst.setInt( 2, 14);
-		pst.setString(3,"delivered");
-		pst.setInt(4,2);
+		pst.setInt(1,order.getUserId());
+		pst.setInt( 2, order.getBookId());
+		pst.setString(3,order.getStatus());
+		pst.setInt(4,order.getQuantity());
 		pst.setDate(5,Date.valueOf(date));
 		
 		int row=pst.executeUpdate();

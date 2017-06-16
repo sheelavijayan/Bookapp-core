@@ -46,11 +46,11 @@ public class LoginServlet extends HttpServlet {
 		
 		if(user==null)
 		{
-			response.sendRedirect("login.html");
+			response.sendRedirect("login.jsp");
 		}
 		else
 		{
-			response.sendRedirect("listBook.html");
+			response.sendRedirect("listBook.jsp");
 		}
 	}
 
