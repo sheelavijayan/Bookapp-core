@@ -1,4 +1,5 @@
 <!docType HTML>
+<%@page import="com.sheela.user.User"%>
 <%@page import="com.sheela.book.Book"%>
 <%@page import="java.util.List"%>
 <%@page import="com.sheela.bookdao.BookDAO"%>
@@ -7,6 +8,10 @@
 <title>BookApp_register</title>
 </head>
 <body>
+<%
+User user=(User) session.getAttribute("Logged_in_user");
+%>
+welcome<%=user.getName() %>
 	<h3>list of books</h3>
 	<%
 		BookDAO bookdao = new BookDAO();
@@ -64,6 +69,6 @@
 			</tr>
 
 </table>-->
-<a href="listBook.html">list of books</a>
+<a href="OrderBook.jsp">Order Book</a>
 		</body>
 </html>
