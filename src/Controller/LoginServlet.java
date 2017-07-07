@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sheela.user.User;
 import com.sheela.userdao.UserDAO;
@@ -27,13 +28,14 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		out.println("Email=" + email);
-		out.println("password=" + password);
+		//out.println("Email=" + email);
+		//out.println("password=" + password);
 		
 		User user=null;
 
 		UserDAO userdao = new UserDAO();
 		try {
+			UserValidation.validateLoginFields(email,password);
 			user=userdao.login(email,password);
 			out.println( user);
 		} catch (ClassNotFoundException e1) {
@@ -42,6 +44,9 @@ public class LoginServlet extends HttpServlet {
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		if(user==null)
@@ -50,8 +55,12 @@ public class LoginServlet extends HttpServlet {
 		}
 		else
 		{
+			
+			HttpSession session=request.getSession();
+			session.setAttribute("Logged_in_user",user);
 			response.sendRedirect("listBook.jsp");
+		
 		}
-	}
+		}
 
 }

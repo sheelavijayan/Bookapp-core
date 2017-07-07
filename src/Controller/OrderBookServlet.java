@@ -23,38 +23,39 @@ import jdk.nashorn.internal.ir.RuntimeNode.Request;
 @WebServlet("/OrderBookServlet")
 public class OrderBookServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   		PrintWriter out = response.getWriter();
-		//out.println("Register Servlet");
-		 String userId= request.getParameter("user_id"); 
-		String bookId = request.getParameter("book_id");
-		String status=request.getParameter("status");
-		String quantity=request.getParameter("quantity");
-		String orderDate=request.getParameter("orders_date");
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+		// out.println("Register Servlet");
+		String userId = request.getParameter("user_id");
+		String bookId = request.getParameter("book_id");		
+		String quantity = request.getParameter("quantity");
 		
-		int uId=Integer.parseInt(userId);
-		int bId=Integer.parseInt(bookId);
-		int quatity=Integer.parseInt(quantity);
-		LocalDate date=LocalDate.parse(orderDate);
+
+		int uId = Integer.parseInt(userId);
+		int bId = Integer.parseInt(bookId);
+		int quatity = Integer.parseInt(quantity);
+
+		Order order = new Order();
+		order.setUserId(uId);
+		order.setBookId(bId);
+		order.setStatus("ORDERED");
+		order.setQuantity(quatity);
+		order.setOrderDate(LocalDate.now());
+		out.println(order);
 		
-Order order=new Order();		
-order.setUserId(uId);
-order.setBookId(bId);
-order.setStatus(status);
-order.setQuantity(quatity);
-order.setOrderDate(date);
-out.println(order);
-OrderDAO orderdao=new OrderDAO();
-try {
-	orderdao.add(order);
-} catch (ClassNotFoundException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-} catch (SQLException e) {
-	// TODO Auto-generated catch block
-	e.printStackTrace();
-}
-  	}
+		
+		OrderDAO orderdao = new OrderDAO();
+		try {
+			orderdao.add(order);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
